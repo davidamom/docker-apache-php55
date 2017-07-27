@@ -7,7 +7,7 @@ RUN apt-get update && apt-get install -y \
     # PHP 5.5.9
         php5 \
         php5-common \
-        #libapache2-mod-php \
+        libapache2-mod-php \
         php5-cli \
         php5-xdebug \
         phpunit \
