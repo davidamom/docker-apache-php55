@@ -8,7 +8,7 @@ RUN apt-get update && apt-get install -y \
         php5 \
         php5-common \
         php5-cli \
-        libapache2-mod-php \
+        #libapache2-mod-php \
         php5-xdebug \
         phpunit \
         php5-mcrypt \
