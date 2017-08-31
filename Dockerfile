@@ -49,9 +49,9 @@ VOLUME /var/www/html
 
 COPY 000-default.conf /etc/apache2/sites-available/000-default.conf
 COPY run /usr/local/bin/run
-#RUN chmod +x /var/www
+RUN chmod +x /var/www
 RUN chmod +x /usr/local/bin/run
-RUN chown -R data-www:data-www /var/www/html
+RUN chown -R www-data.www-data /var/www/html
 # Enables apache rewrite module
 RUN a2enmod rewrite
 
