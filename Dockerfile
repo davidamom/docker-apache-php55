@@ -1,5 +1,6 @@
 FROM ubuntu:14.04
-MAINTAINER David Amom <davidamom@gmail.com>
+# MAINTAINER David Amom <davidamom@gmail.com> (deprecated)
+LABEL maintainer = "David Amom <davidamom@gmail.com>"
 
 RUN apt-get update && apt-get install -y \
     # Apache 2.4.7
@@ -31,24 +32,26 @@ RUN apt-get update && apt-get install -y \
     # Optional
     #dialog apt-utils \
     nano \
+    #curl \
 
     # Cleaning...
     && apt-get clean && apt-get autoclean && apt-get autoremove \
     && rm -rf /var/lib/apt/lists/*
 # Setting environment vars
-ENV APACHE_RUN_USER  www-data
-ENV APACHE_RUN_GROUP www-data
-ENV APACHE_LOG_DIR   /var/log/apache2
-ENV APACHE_LOCK_DIR  /var/lock
-ENV APACHE_PID_FILE  /var/run/apache2.pid
+ENV APACHE_RUN_USER  = "www-data"
+ENV APACHE_RUN_GROUP = "www-data"
+ENV APACHE_LOG_DIR   = "/var/log/apache2"
+ENV APACHE_LOCK_DIR  = "/var/lock"
+ENV APACHE_PID_FILE  = "/var/run/apache2/apache2.pid"
 
 VOLUME /var/www/html
 #ADD . /var/www/html/
 
 COPY 000-default.conf /etc/apache2/sites-available/000-default.conf
 COPY run /usr/local/bin/run
-RUN chmod +x /var/www
+#RUN chmod +x /var/www
 RUN chmod +x /usr/local/bin/run
+RUN chown -R data-www:data-www /var/www/html
 # Enables apache rewrite module
 RUN a2enmod rewrite
 
@@ -60,7 +63,6 @@ RUN a2enmod rewrite
 
 LABEL Description=" Apache 2.4.7 Webserver - PHP 5.5.9"
 EXPOSE 80
-
 #SSL
 #EXPOSE 443
 
